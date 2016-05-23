@@ -90,7 +90,7 @@ if ($outfile -eq "") {
             "JSONListModel/JSONListModel.qml"
         foreach($f in $guiFiles) {
             $guiGithub = "https://raw.githubusercontent.com/mikewse/pirateplayer/master"
-            UpdateDownloadedFile "$guiGithub/src/gui/qml/$f" "$guiDir\$f"
+            UpdateDownloadedFile "$guiGithub/src/gui/qml/$f" ("$guiDir\$f" -replace "/","\")
         }
 
         # Update start menu shortcut
