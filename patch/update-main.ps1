@@ -51,15 +51,47 @@ if ($outfile -eq "") {
             throw "Can't find Pirateplayer program directory"
         }
 
-        # Create new directory
+		# Find existing gui dir
+        $guiDir = "${env:LOCALAPPDATA}\pirateplay\pirateplayer\gui"
+        if (!(Test-Path $guiDir)) {
+            throw "Can't find Pirateplayer gui directory"
+        }
+
+        # Create patch directory
         $patchDir = "$programDir\patch"
         CreateDirectoryIfNeeded $patchDir
 
         # Update patch directory
+        $patchFiles = 
+            "backend-server.ps1",
+            "download.bat",
+            "pirateplayer-start.bat",
+            "update.bat",
+            "update-main.ps1"
+        foreach($f in $patchFiles) {
+            $patchGithub = "https://raw.githubusercontent.com/mikewse/pirateplayer-patch/master"
+            UpdateDownloadedFile "$patchGithub/patch/$f" "$patchDir\$f"
+        }
         UpdateLocalFile "$programDir\ffmpeg.exe" "$patchDir\ffmpeg.exe"
-        UpdateDownloadedFile "https://svtplay-dl.se/download/latest/svtplay-dl.exe" "$patchDir\svtplay-dl.exe"
+        UpdateDownloadedFile https://svtplay-dl.se/download/latest/svtplay-dl.exe "$patchDir\svtplay-dl.exe"
 
-        # Update browser directory
+        # Update gui directory
+        $guiFiles = 
+            "main.qml", 
+            "browser/pirateplay.qml", 
+            "browser/menu.qml", 
+            "browser/svt/alfabetical.qml", 
+            "browser/svt/open_a-z.qml", 
+            "browser/svt/open_program.qml", 
+            "browser/svt/program.qml", 
+            "browser/tv4/a-z.qml", 
+            "browser/tv4/program.qml", 
+            "imports/_common/Components/StreamDialog.qml", 
+            "JSONListModel/JSONListModel.qml"
+        foreach($f in $guiFiles) {
+            $guiGithub = "https://raw.githubusercontent.com/mikewse/pirateplayer/master"
+            UpdateDownloadedFile "$guiGithub/src/gui/qml/$f" "$guiDir\$f"
+        }
 
         # Update start menu shortcut
         $startMenuDir = "${env:APPDATA}\Microsoft\Windows\Start Menu\Programs\Pirateplayer"
