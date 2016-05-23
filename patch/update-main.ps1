@@ -31,7 +31,7 @@ if ($outfile -eq "") {
     function UpdateDownloadedFile($url, $path) {
         Write-Output "Checking $(Split-Path -Leaf $path)"
         $tmp = "$path-$pid.tmp"
-        Invoke-WebRequest $url -OutFile "$tmp"
+        (New-Object System.Net.WebClient).DownloadFile("$url", "$tmp") // no Invoke-WebRequest on Win 7
         fc.exe /b "$path" "$tmp" 2>&1 >$null
         if ($LastExitCode -ne 0) {
             Write-Output "- updating"
