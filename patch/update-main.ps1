@@ -9,6 +9,7 @@ if ($outfile -eq "") {
     $script = $MyInvocation.MyCommand.Path
     Start-Process -FilePath powershell.exe -Verb runas -WindowStyle Hidden -ArgumentList "-executionpolicy bypass -file ""$script"" ""$outfile"""
     Get-Content -Path $outfile -Wait 2>$null
+    Start-Sleep -Milliseconds 2000
     return
 }
 
