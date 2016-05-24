@@ -5,12 +5,15 @@ Scripts that install updated channel definitions and replaces the media download
 ## Preqrequisites
 
 Existing PiratePlayer installation on Windows.
+
 PowerShell 2.0+
 
 ## Installing
 
 Download and run the install script:
+
 [pirateplayer-patch-install.bat](https://github.com/mikewse/pirateplayer-patch/releases/download/1.0/pirateplayer-patch-install.bat)
+
 Accept any UAC elevation prompt.
 
 The installation script will patch some PiratePlayer files and also add some of its own files in (program files)\Pirateplayer\patch. Svtplay-dl will also be downloaded to this directory and will effectively replace PiratePlayer's dependency to the stream handling on pirateplay.se.
