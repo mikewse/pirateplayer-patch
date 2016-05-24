@@ -1,6 +1,6 @@
 # pirateplayer-patch
 
-Scripts that install updated channel definitions and replaces the media download backend in an existing PiratePlayer installation.
+Scripts that install updated channel definitions and replaces the media download backend in an existing **PiratePlayer** installation.
 
 ## Preqrequisites
 
@@ -16,13 +16,13 @@ Download and run the install script:
 
 Accept any UAC elevation prompt.
 
-The installation script will patch some PiratePlayer files and also add some of its own files in (program files)\Pirateplayer\patch. Svtplay-dl will also be downloaded to this directory and will effectively replace PiratePlayer's dependency to the stream handling on pirateplay.se.
+The installation script will patch some PiratePlayer files and also add some of its own files in `(program files)\Pirateplayer\patch`. **Svtplay-dl** will also be downloaded to this directory and will effectively replace PiratePlayer's dependency to the stream handling on `pirateplay.se`.
 
-Run update.bat in the patch directory to update to the latest changes as they are published.
+Run `update.bat` in the `patch` directory to update to the latest changes as they are published.
 
 ## Usage
 
-PiratePlayer should be started through pirateplayer-start.bat in the patch directory to function correctly. The installation script will update PiratePlayer's start menu to reflect this, but you need to update any other shortcuts yourself.
+PiratePlayer should be started through `pirateplayer-start.bat` in the `patch` directory to function correctly. The installation script will update PiratePlayer's start menu to reflect this, but you need to update any other shortcuts yourself.
 
 You'll notice a minimized command prompt window when starting with the patch. This window handles the new download backend and will pop new windows showing progress for each download.
 
