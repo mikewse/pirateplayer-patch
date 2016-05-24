@@ -9,7 +9,7 @@ if ($cmd -eq "start") {
     exit
 }
 if ($cmd -eq "stop") {
-    Invoke-WebRequest -Uri "http://localhost:1199/exit" >$null
+    (New-Object System.Net.WebClient).DownloadString("http://localhost:1199/exit") >$null # no Invoke-WebRequest on Win 7
     exit
 }
 
