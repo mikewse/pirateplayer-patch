@@ -4,7 +4,7 @@ Scripts that install updated channel definitions and replaces the media download
 
 ## Preqrequisites
 
-Existing PiratePlayer installation on Windows.
+Existing PiratePlayer installation on Windows
 
 PowerShell 2.0+
 
@@ -28,6 +28,6 @@ You'll notice a minimized command prompt window when starting with the patch. Th
 
 ## Credits
 
-[pirateplayer](https://github.com/jackuess/pirateplayer) - the original application updated by this patch (my updates [in this fork](https://github.com/mikewse/pirateplayer))
+[pirateplayer](https://github.com/jackuess/pirateplayer) by jackuess - the original application updated by this patch (my updates [in this fork](https://github.com/mikewse/pirateplayer))
 
-[svtplay-dl](https://github.com/spaam/svtplay-dl) - media download engine used in this patch
+[svtplay-dl](https://github.com/spaam/svtplay-dl) by spaam - media download engine used in this patch
