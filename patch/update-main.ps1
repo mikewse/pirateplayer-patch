@@ -42,6 +42,10 @@ if ($outfile -eq "") {
     }
 
     try {
+        if ($PSVersionTable.PSVersion.Major -lt 2) {
+            throw "Installation requires Powershell 2.0 or later"
+        }
+
         # Find existing Pirateplayer installation
         if (Test-Path "${env:ProgramFiles}\Pirateplayer") {
             $programDir = "${env:ProgramFiles}\Pirateplayer"
