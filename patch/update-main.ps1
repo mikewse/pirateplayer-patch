@@ -1,15 +1,41 @@
 param(
+    [string] $programDir,
     [string] $outfile
 )
 
-# Respawn ourselves in elevated shell (trigger UAC prompt)
-if ($outfile -eq "") {
-    $outfile = "${env:TEMP}\update-output-$pid.txt"
-    New-Item -Type File -Path $outfile >$null
-    $script = $MyInvocation.MyCommand.Path
-    Start-Process -FilePath powershell.exe -Verb runas -WindowStyle Hidden -ArgumentList "-executionpolicy bypass -file ""$script"" ""$outfile"""
-    Get-Content -Path $outfile -Wait 2>$null
+# Check some stuff while in user mode and then respawn ourselves in elevated shell (trigger UAC prompt)
+if ($programDir -eq "" -or $outfile -eq "") {
+    try {
+        if ($PSVersionTable.PSVersion.Major -lt 2) {
+            throw "Installation requires Powershell 2.0 or later"
+        }
+
+        $script = $MyInvocation.MyCommand.Path
+
+        # Find existing Pirateplayer installation
+        $scriptDir = Split-Path -Parent $script
+        $parentDir = Split-Path -Parent $scriptDir
+        if (Test-Path "${env:ProgramFiles}\Pirateplayer") {
+            $programDir = "${env:ProgramFiles}\Pirateplayer"
+        } elseif (Test-Path "${env:ProgramFiles(x86)}\Pirateplayer") {
+            $programDir = "${env:ProgramFiles(x86)}\Pirateplayer"
+        } elseif (((Split-Path -Leaf $scriptDir) -eq "patch") -and (Test-Path "$parentDir\pirateplayer.exe")) {
+            $programDir = $parentDir
+        } else {
+            $programDir = Read-Host "Specify full path to existing PiratePlayer installation directory"
+        }
+
+        $outfile = "${env:TEMP}\update-output-$pid.txt"
+        New-Item -Type File -Force -Path $outfile >$null
+        Start-Process -FilePath powershell.exe -Verb runas -WindowStyle Hidden -ArgumentList "-executionpolicy bypass -file ""$script"" ""$programDir"" ""$outfile"""
+        Get-Content -Path $outfile -Wait 2>$null
+    } catch {
+        Write-Output "Error: $_"
+    }
     Start-Sleep -Milliseconds 2000
+    if ($parentDir -ne $programDir) {
+        del $script
+    }
     return
 }
 
@@ -43,17 +69,9 @@ if ($outfile -eq "") {
     }
 
     try {
-        if ($PSVersionTable.PSVersion.Major -lt 2) {
-            throw "Installation requires Powershell 2.0 or later"
-        }
-
-        # Find existing Pirateplayer installation
-        if (Test-Path "${env:ProgramFiles}\Pirateplayer") {
-            $programDir = "${env:ProgramFiles}\Pirateplayer"
-        } elseif (Test-Path "${env:ProgramFiles(x86)}\Pirateplayer") {
-            $programDir = "${env:ProgramFiles(x86)}\Pirateplayer"
-        } else {
-            throw "Can't find Pirateplayer program directory"
+        # Check input valid
+        if (!(Test-Path "$programDir\pirateplayer.exe")) {
+            throw "Invalid Pirateplayer installation directory"
         }
 
 		# Find existing gui dir
@@ -61,6 +79,8 @@ if ($outfile -eq "") {
         if (!(Test-Path $guiDir)) {
             throw "Can't find Pirateplayer gui directory"
         }
+
+        Write-Output "Updating PiratePlayer in $programDir"
 
         # Create patch directory
         $patchDir = "$programDir\patch"
