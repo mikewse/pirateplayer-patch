@@ -105,6 +105,8 @@ if ($programDir -eq "" -or $outfile -eq "") {
             "main.qml", 
             "browser/pirateplay.qml", 
             "browser/menu.qml", 
+            "browser/mtg/a-z.qml", 
+            "browser/mtg/program.qml", 
             "browser/svt/alfabetical.qml", 
             "browser/svt/open_a-z.qml", 
             "browser/svt/open_program.qml", 
