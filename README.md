@@ -1,8 +1,8 @@
 # pirateplayer-patch
 
-Scripts that install updated channel definitions and replaces the media download backend in an existing **PiratePlayer** installation.
+Scripts that make an existing **PiratePlayer** installation come alive again by installing updated channel definitions and replacing the media download backend.
 
-## Preqrequisites
+## Prerequisites
 
 Existing PiratePlayer installation on Windows
 
