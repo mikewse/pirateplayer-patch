@@ -1,8 +1,8 @@
 @echo off
 
-echo url: %1
-echo out: %2
-echo sub: %3
+rem echo url: %1
+rem echo out: %2
+rem echo sub: %3
 
 setlocal
 
