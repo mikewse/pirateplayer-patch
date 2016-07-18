@@ -1,6 +1,6 @@
 # pirateplayer-patch
 
-If PiratePlayer is giving the error:
+If **PiratePlayer** is giving the error:
 ```
 Ett fel uppstod!
 ```
@@ -8,7 +8,7 @@ then this patch is for you.
 
 The original PiratePlayer has not been updated for a long time so channel definitions are in many cases out of sync with the play sites, leading to errors. Sometimes errors are caused by PiratePlayer's dependency to the external service on pirateplay.se.
 
-This patch installs modifications that make your existing **PiratePlayer** installation come alive again by installing updated channel definitions and replacing the media download backend so it doesn't rely on pirateplay.se.
+This patch installs modifications that make your existing PiratePlayer installation come alive again by installing updated channel definitions and replacing the media download backend so it doesn't rely on pirateplay.se.
 
 ## Prerequisites
 
