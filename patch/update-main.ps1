@@ -114,7 +114,9 @@ if ($programDir -eq "" -or $outfile -eq "") {
             "browser/tv4/a-z.qml", 
             "browser/tv4/program.qml", 
             "imports/_common/Components/StreamDialog.qml", 
-            "JSONListModel/JSONListModel.qml"
+            "JSONListModel/JSONListModel.qml",
+            "HttpREModel/HttpREModel.qml",
+            "imports/_common/Components/UserSettings.qml"
         foreach($f in $guiFiles) {
             $guiGithub = "https://raw.githubusercontent.com/mikewse/pirateplayer/master"
             UpdateDownloadedFile "$guiGithub/src/gui/qml/$f" ("$guiDir\$f" -replace "/","\")
